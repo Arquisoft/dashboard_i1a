@@ -11,6 +11,7 @@ Skeleton of participants module
 
 # Authors
 
-- Herminio García González (@herminiogg)
-- Jose Emilio Labra Gayo (@labra)
-
+- Sergio Mosquera Dopico (@sergioMD15)
+- Jorge López Alonso (@jlpza)
+- Julián García Murias (@jgm96)
+- Gonzalo Menéndez Borge (@MrSummat)
