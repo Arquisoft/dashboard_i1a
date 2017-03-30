@@ -1,0 +1,185 @@
+package persistence.model;
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="TUsers")
+public class User {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String name;
+	private String surname;
+	private String password;
+	@Column(unique = true)
+	private String email;
+	private String nationality;
+	@Column(unique = true)
+	private String DNI;
+	private String address;
+	private Date birthDate;
+	
+	public User(){}
+	
+	@OneToMany(mappedBy = "user")
+	private Set<Proposal> proposals = new HashSet<Proposal>();
+	
+	@OneToMany(mappedBy = "user")
+	private Set<Comment> comments = new HashSet<Comment>();
+	
+	/**
+	@OneToMany(mappedBy = "user")
+	private Set<VoteProposal> votesProposal = new HashSet<VoteProposal>();
+	@OneToMany(mappedBy = "user")
+	private Set<VoteComment> votesProposal = new HashSet<VoteComment>();
+	*/
+	
+	public User(Long id, String name, String surname, String password, String email, String nationality,
+			String DNI, String address, Date birthDate) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.password = password;
+		this.email = email;
+		this.nationality = nationality;
+		this.DNI = DNI;
+		this.address = address;
+		this.birthDate = birthDate;
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSurname() {
+		return surname;
+	}
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getNationality() {
+		return nationality;
+	}
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+	public String getDNI() {
+		return DNI;
+	}
+	public void setDNI(String dNI) {
+		DNI = dNI;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Date getBirthDate() {
+		return birthDate;
+	}
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((DNI == null) ? 0 : DNI.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (DNI == null) {
+			if (other.DNI != null)
+				return false;
+		} else if (!DNI.equals(other.DNI))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		return true;
+	}
+	
+	public Set<Proposal> getProposal() {
+		return new HashSet<Proposal>(proposals);
+	}
+
+	Set<Proposal> _getProposal() {
+		return proposals;
+	}	
+
+	public Set<Comment> getcomments() {
+		return new HashSet<Comment>(comments);
+	}
+
+	Set<Comment> _getcomments() {
+		return comments;
+	}
+/**
+	public Set<VoteProposal> getVotesProposal() {
+		return new HashSet<VoteProposal>(votesProposal);
+	}
+
+	Set<VoteProposal> _getVotesProposal() {
+		return votesProposal;
+	}
+	
+	public Set<VoteComment> getVotesComment() {
+		return new HashSet<VoteComment>(votescomments);
+	}
+
+	Set<VoteComment> _getVotesComment() {
+		return votescomments;
+	}
+	*/
+	
+	
+}
