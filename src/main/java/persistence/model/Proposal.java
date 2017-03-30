@@ -1,10 +1,14 @@
 package persistence.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +24,12 @@ public class Proposal {
 	private int positiveVotes;
 	private int negativeVotes;
 	private int minVotes;
+	
+	@OneToMany(mappedBy = "proposal")
+	private Set<Comment> comments = new HashSet<Comment>();
+	
+	@OneToMany(mappedBy = "proposal")
+	private Set<VoteProposal> votesProposal = new HashSet<VoteProposal>();
 	
 	@ManyToOne
 	private User user;	
@@ -105,7 +115,25 @@ public class Proposal {
 		} else if (!idProposal.equals(other.idProposal))
 			return false;
 		return true;
+	}
+	
+	public Set<Comment> getComments(){
+		return new HashSet<Comment>(comments);
+	}
+	
+	Set<Comment> _getComments(){
+		return this.comments;
+	}
+
+	public void setUser(User user) {
+		this.user=user;		
+	}
+
+	public Set<VoteProposal> getVotesProposal() {
+		return new HashSet<VoteProposal>(votesProposal);
 	}	
 	
-	
+	Set<VoteProposal> _getVotesProposal(){
+		return votesProposal;
+	}
 }

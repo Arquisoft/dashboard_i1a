@@ -31,10 +31,8 @@ public class Comment {
 	@ManyToOne
 	private Proposal proposal;
 	
-	/**
 	@OneToMany(mappedBy = "commentary")
-	private Set<VoteComment> votesComments = new HashSet<VoteComment>();		
-	*/
+	private Set<VoteComment> votesComments = new HashSet<VoteComment>();
 	
 	public Comment(){}	
 	
@@ -126,14 +124,17 @@ public class Comment {
 	void _setSuggestion(Proposal proposal) {
 		this.proposal = proposal;
 	}
-
-/**	
-	public Set<VoteCommentary> getVotesComments() {
+	
+	public Set<VoteComment> getVotesComments() {
 		return new HashSet<VoteComment>(votesComments);
 	}
 
-	Set<VoteCommentary> _getVotesComments() {
+	Set<VoteComment> _getVotesComments() {
 		return votesComments;
 	}
-	*/
+
+	void _setProposal(Proposal proposal) {
+		this.proposal=proposal;		
+	}
+	
 }
