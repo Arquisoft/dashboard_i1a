@@ -24,6 +24,12 @@ public class Proposal extends Votable{
 	private User user;	
 	
 	public Proposal(){}	
+	
+	public Proposal(User user, String title, String content){
+		Association.MakeProposal.link(user, this);
+		setTitle(title);
+		setContent(content);
+	}
 
 	public String getTitle() {
 		return title;

@@ -37,17 +37,17 @@ public class Association {
 
 	public static class MakeComment {
 
-		public static void link(User User, Comment comment, Proposal proposal) {
+		public static void link(User user, Comment comment, Proposal proposal) {
 			comment._setProposal(proposal);
-			comment._setUser(User);
+			comment._setUser(user);
 
 			proposal._getComments().add(comment);
-			User._getComments().add(comment);
+			user._getComments().add(comment);
 		}
 
-		public static void unlink(User User, Comment comment, Proposal proposal) {
+		public static void unlink(User user, Comment comment, Proposal proposal) {
 			proposal._getComments().remove(comment);
-			User._getComments().remove(comment);
+			user._getComments().remove(comment);
 
 			comment._setProposal(null);
 			comment._setUser(null);

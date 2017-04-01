@@ -25,8 +25,9 @@ public class Comment extends Votable{
 	public Comment(String content, User user, Proposal proposal) {
 		super();
 		this.content = content;
-		this.user = user;
-		this.proposal = proposal;
+		Association.MakeComment.link(user, this, proposal);
+//		this.user = user;
+//		this.proposal = proposal;
 	}
 
 	public String getContent() {
