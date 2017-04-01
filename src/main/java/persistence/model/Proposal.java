@@ -28,9 +28,6 @@ public class Proposal {
 	@OneToMany(mappedBy = "proposal")
 	private Set<Comment> comments = new HashSet<Comment>();
 	
-	@OneToMany(mappedBy = "proposal")
-	private Set<VoteProposal> votesProposal = new HashSet<VoteProposal>();
-	
 	@ManyToOne
 	private User user;	
 	
@@ -127,13 +124,5 @@ public class Proposal {
 
 	public void setUser(User user) {
 		this.user=user;		
-	}
-
-	public Set<VoteProposal> getVotesProposal() {
-		return new HashSet<VoteProposal>(votesProposal);
-	}	
-	
-	Set<VoteProposal> _getVotesProposal(){
-		return votesProposal;
 	}
 }

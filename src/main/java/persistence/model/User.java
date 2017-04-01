@@ -38,11 +38,6 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private Set<Comment> comments = new HashSet<Comment>();
 	
-	@OneToMany(mappedBy = "user")
-	private Set<VoteProposal> votesProposal = new HashSet<VoteProposal>();
-	@OneToMany(mappedBy = "user")
-	private Set<VoteComment> votesComments = new HashSet<VoteComment>();
-	
 	public User(Long id, String name, String surname, String password, String email, String nationality,
 			String DNI, String address, Date birthDate) {
 		super();
@@ -160,22 +155,6 @@ public class User {
 
 	Set<Comment> _getComments() {
 		return comments;
-	}
-	
-	public Set<VoteProposal> getVotesProposal() {
-		return new HashSet<VoteProposal>(votesProposal);
-	}
-
-	Set<VoteProposal> _getVotesProposal() {
-		return votesProposal;
-	}
-	
-	public Set<VoteComment> getVotesComment() {
-		return new HashSet<VoteComment>(votesComments);
-	}
-
-	Set<VoteComment> _getVotesComment() {
-		return votesComments;
 	}
 	
 	
