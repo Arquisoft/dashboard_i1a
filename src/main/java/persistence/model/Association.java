@@ -2,38 +2,22 @@ package persistence.model;
 
 public class Association {
 
-	public static class VoteCommentUser {
+	public static class Votation {
 
-		public static void link(User user, VoteComment vote, Comment comment) {
-			comment._setUser(user);
-			user._getComments().add(comment);
-			vote.setUser(user);
-			vote.setComment(comment);
+		public static void link(User User, Vote vote, Votable votable) {
+			vote._setVotable(votable);
+			vote._setUser(User);
+
+			votable._getVotes().add(vote);
+			User._getVotes().add(vote);
 		}
 
-		public static void unlink(User user, VoteComment vote, Comment comment) {
-			vote.setUser(null);
-			vote.setComment(null);
-			user._getComments().remove(comment);
-			comment._setUser(null);
-		}
-	}
+		public static void unlink(User User, Vote vote, Proposal proposal) {
+			proposal._getVotes().remove(vote);
+			User._getVotes().remove(vote);
 
-	public static class VoteProposalUser {
-
-		public static void link(User user, VoteProposal vote, Proposal proposal) {
-			proposal.setUser(user);
-			user._getProposals().add(proposal);
-			vote.setProposal(proposal);
-			vote.setUser(user);
-
-		}
-
-		public static void unlink(User user, VoteProposal vote, Proposal proposal) {
-			vote.setUser(null);
-			vote.setProposal(null);
-			user._getProposals().remove(proposal);
-			proposal.setUser(null);
+			vote._setVotable(null);
+			vote._setUser(null);
 
 		}
 	}
@@ -51,17 +35,22 @@ public class Association {
 		}
 	}
 
-	public static class CommentProposal {
+	public static class MakeComment {
 
-		public static void link(Comment comment, Proposal proposal) {
+		public static void link(User User, Comment comment, Proposal proposal) {
 			comment._setProposal(proposal);
+			comment._setUser(User);
+
 			proposal._getComments().add(comment);
+			User._getComments().add(comment);
 		}
 
-		public static void unlink(Comment comment, Proposal proposal) {
+		public static void unlink(User User, Comment comment, Proposal proposal) {
 			proposal._getComments().remove(comment);
+			User._getComments().remove(comment);
+
 			comment._setProposal(null);
+			comment._setUser(null);
 		}
 	}
-
 }

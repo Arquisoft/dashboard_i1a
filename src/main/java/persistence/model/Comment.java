@@ -1,59 +1,32 @@
 package persistence.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TComments")
-public class Comment {
+public class Comment extends Votable{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@Column(unique = true)
-	private String idComment;
-	private String content;
-	private int positiveVotes;
-	private int negativeVotes;
+	private String content;	
 
 	@ManyToOne
+	@JoinColumn(nullable = false)
 	private User user;
 
 	@ManyToOne
+	@JoinColumn(nullable = false)
 	private Proposal proposal;
 
 	public Comment() {
-	}
-
-	public Comment(Long id, String idComment, String content, int positiveVotes, int negativeVotes, User user) {
+	}	
+	
+	public Comment(String content, User user, Proposal proposal) {
 		super();
-		this.id = id;
-		this.idComment = idComment;
 		this.content = content;
-		this.positiveVotes = positiveVotes;
-		this.negativeVotes = negativeVotes;
 		this.user = user;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getIdComment() {
-		return idComment;
-	}
-
-	public void setIdComment(String idComment) {
-		this.idComment = idComment;
+		this.proposal = proposal;
 	}
 
 	public String getContent() {
@@ -63,23 +36,7 @@ public class Comment {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	public int getPositiveVotes() {
-		return positiveVotes;
-	}
-
-	public void setPositiveVotes(int positiveVotes) {
-		this.positiveVotes = positiveVotes;
-	}
-
-	public int getNegativeVotes() {
-		return negativeVotes;
-	}
-
-	public void setNegativeVotes(int negativeVotes) {
-		this.negativeVotes = negativeVotes;
-	}
-
+	
 	public User getParticipant() {
 		return user;
 	}
@@ -87,32 +44,7 @@ public class Comment {
 	public void setParticipant(User user) {
 		this.user = user;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((idComment == null) ? 0 : idComment.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Comment other = (Comment) obj;
-		if (idComment == null) {
-			if (other.idComment != null)
-				return false;
-		} else if (!idComment.equals(other.idComment))
-			return false;
-		return true;
-	}
-
+	
 	public User getUser() {
 		return user;
 	}
@@ -123,14 +55,49 @@ public class Comment {
 
 	public Proposal getProposal() {
 		return proposal;
-	}
-
-	void _setSuggestion(Proposal proposal) {
-		this.proposal = proposal;
-	}
+	}	
 
 	void _setProposal(Proposal proposal) {
 		this.proposal = proposal;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((proposal == null) ? 0 : proposal.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Comment other = (Comment) obj;
+		if (content == null) {
+			if (other.content != null)
+				return false;
+		} else if (!content.equals(other.content))
+			return false;
+		if (proposal == null) {
+			if (other.proposal != null)
+				return false;
+		} else if (!proposal.equals(other.proposal))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+	
+	
 
 }

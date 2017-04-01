@@ -1,4 +1,4 @@
-package persistence.dao;
+package persistence.repositories;
 
 import javax.transaction.Transactional;
 
@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import persistence.model.User;
 
 @Transactional
-public interface UserDao extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
     
     public User findByEmail(String email);
 
