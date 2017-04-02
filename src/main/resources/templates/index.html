@@ -5,6 +5,19 @@
 <body>
 <h1>Dashboard0 skeleton</h1>
 <h2>Receiving messages for you:</h2>
-<div id="messages"></div>
+<div id="messages">
+
+<table>
+      <tr>
+        <th>NAME</th>
+        <th>VOTES</th>
+      </tr>
+      <tr th:each="proposalEntry : ${proposals}">
+        <td th:text="${proposalEntry.value.getTitle()}"></td>
+        <td th:text="${proposalEntry.value.getNumberOfVotes()}"></td>
+      </tr>
+    </table>
+
+</div>
 </body>
 </html>

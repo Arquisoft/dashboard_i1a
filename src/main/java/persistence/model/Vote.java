@@ -1,5 +1,7 @@
 package persistence.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -7,7 +9,9 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @IdClass(KeyVote.class)
-public class Vote {
+public class Vote implements Serializable {
+
+	private static final long serialVersionUID = -8143484614238441355L;
 
 	@Id @ManyToOne
 	private User User;
@@ -19,8 +23,7 @@ public class Vote {
 
 	private boolean value;
 
-	Vote() {
-	}
+	Vote() {}
 
 	public Vote(User User, Votable votable, boolean value) {
 		this.value = value;
@@ -50,5 +53,5 @@ public class Vote {
 	public void setVoteType(VoteType voteType) {
 		this.voteType = voteType;
 	}
-	
+
 }

@@ -18,6 +18,9 @@ public abstract class Votable {
 	@GeneratedValue
 	private Long id;
 
+	private int numberOfVotes;
+
+	
 	@OneToMany(mappedBy = "votable")
 	private Set<Vote> votes = new HashSet<>();
 
@@ -60,5 +63,12 @@ public abstract class Votable {
 		return true;
 	}
 	
+	public int getNumberOfVotes() {
+		return numberOfVotes;
+	}
+
+	public void setNumberOfVotes(int numberOfVotes) {
+		this.numberOfVotes = numberOfVotes;
+	}
 	
 }
