@@ -14,15 +14,11 @@ import persistence.repositories.CommentRepository;
 import services.CommentService;
 
 @Service
-public class CommentServiceImpl implements CommentService {
+public class CommentServiceImpl implements CommentService{
 
+	@Autowired
 	private CommentRepository repository;
 	
-	@Autowired
-	public CommentServiceImpl(CommentRepository repository) {
-		this.repository = repository;
-	}
-
 	@Override
 	public void save(Comment comment) {
 		repository.save(comment);
@@ -47,11 +43,6 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<Comment> findByUser(User user) {
 		return repository.findByUser(user);
-	}
-
-	@Override
-	public void delete(Comment comment) {
-		repository.delete(comment);
 	}
 
 	@Override

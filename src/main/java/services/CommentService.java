@@ -9,7 +9,6 @@ import persistence.model.User;
 public interface CommentService {
 	
 	void save(Comment comment);
-	void delete(Comment comment);
 	boolean checkExists(Long id);
 	List<Comment> findAll();
 	List<Comment> findByProposal(Proposal proposal);

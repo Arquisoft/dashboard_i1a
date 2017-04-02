@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Participation System</h1>
-  <div id="main">
+<div id="main">
         <div class="container-fluid">
 
             <div class="row">
@@ -15,7 +15,7 @@
             </div>
 			
 			<table>
-					<tr>
+				<tr>
 					<th>Number</th>
 					<th>Proposal</th>
 					<th>Votes</th>
@@ -23,9 +23,9 @@
 			   </tr>
 			   <tr th:each="proposal,iterationStatus  : ${proposal}">
 					<td th:text="${iterationStatus.count}">1</td>
-					<td th:text="${proposal.name}"></td>
-					<td th:text="${proposal.numvotes}"></td>
-					<td th:text="${proposal.status}"></td>
+					<td th:text="${proposal.getName()}"></td>
+					<td th:text="${proposal.getNumberOfVotes()}"></td>
+					<td th:text="${proposal.getStatus()}"></td>
 			   </tr>
 			</table>
 

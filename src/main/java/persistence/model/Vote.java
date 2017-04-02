@@ -14,7 +14,7 @@ public class Vote implements Serializable {
 	private static final long serialVersionUID = -8143484614238441355L;
 
 	@Id @ManyToOne
-	private User User;
+	private User user;
 	
 	@Id @ManyToOne
 	private Votable votable;
@@ -25,9 +25,9 @@ public class Vote implements Serializable {
 
 	Vote() {}
 
-	public Vote(User User, Votable votable, boolean value) {
+	public Vote(User user, Votable votable, boolean value) {
 		this.value = value;
-		Association.Votation.link(User, this, votable);
+		Association.Votation.link(user, this, votable);
 	}	
 
 	public void setValue(boolean value) {
@@ -38,8 +38,8 @@ public class Vote implements Serializable {
 		return value;
 	}
 	
-	public void _setUser(User User) {
-		this.User = User;
+	public void _setUser(User user) {
+		this.user = user;
 	}
 
 	void _setVotable(Votable votable) {
@@ -54,4 +54,34 @@ public class Vote implements Serializable {
 		this.voteType = voteType;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((votable == null) ? 0 : votable.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vote other = (Vote) obj;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		if (votable == null) {
+			if (other.votable != null)
+				return false;
+		} else if (!votable.equals(other.votable))
+			return false;
+		return true;
+	}
 }

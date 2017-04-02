@@ -15,14 +15,12 @@
             </div>
 			
 			<table>
-					<tr>
 					<th>Votes</th>
 					<th>User</th>
-					<th></th>
 					<th>Comment</th>
 			   </tr>
 			   <tr th:each="comment : ${proposal.getComments()}">
-					<td th:text="${comment.getNumberOfVotes()}"></td>
+			        <td th:text="${comment.getNumberOfVotes()}"></td>
 					<td th:text="${comment.getUser().getName()}"></td>
 					<td th:text="${comment.getContent()}"></td>
 			   </tr>

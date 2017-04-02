@@ -42,10 +42,9 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private Set<Comment> comments = new HashSet<Comment>();
 
-	public User(Long id, String name, String surname, String password, String email, String nationality, String DNI,
+	public User(String name, String surname, String password, String email, String nationality, String DNI,
 			String address, Date birthDate) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.password = password;

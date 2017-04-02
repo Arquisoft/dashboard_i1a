@@ -12,16 +12,11 @@ import persistence.repositories.ProposalRepository;
 import services.ProposalService;
 
 @Service
-public class ProposalServiceImpl implements ProposalService {
+public class ProposalServiceImpl implements ProposalService{
 
+	@Autowired
 	private ProposalRepository repository;
 	
-	@Autowired
-	public ProposalServiceImpl(ProposalRepository repository) {
-		this.repository = repository;
-	}
-
-	@Override
 	public void save(Proposal proposal) {
 		repository.save(proposal);
 
@@ -36,11 +31,6 @@ public class ProposalServiceImpl implements ProposalService {
 				proposals.add(it.next());
 		}
 		return proposals;
-	}
-
-	@Override
-	public void delete(Proposal proposal) {
-		repository.delete(proposal);
 	}
 
 	@Override
