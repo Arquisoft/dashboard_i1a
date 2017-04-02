@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import persistence.model.Association;
+import persistence.model.Comment;
 import persistence.model.Proposal;
+import persistence.model.User;
 
 @Controller
 public class MainController {
@@ -22,27 +25,40 @@ public class MainController {
 	private static final Logger logger = Logger.getLogger(MainController.class);
 	private List<SseEmitter> sseEmitters = Collections.synchronizedList(new ArrayList<>());
 
-	
 	private Map<String, Proposal> proposals = generateProposals();
 
 	@RequestMapping("/live")
 	public String landing(Model model) {
 		return "index";
 	}
-	
+
 	@RequestMapping("/viewProposal")
 	public String viewProposal(Model model, Long id) {
-		//put the object in the map
+		// put the proposal in the map
+		Proposal p1 = new Proposal();
+
+		// Comentario de prueba 1
+		Comment c1 = new Comment();
+		Association.MakeComment.link(new User(), c1, p1);
+		c1.setContent("pole");
+
+		// Comentario de prueba 2
+		Comment c2 = new Comment();
+		c2.setContent("No te lo perdonare Carmena");
+		Association.MakeComment.link(new User(), c2, p1);
+
+		model.addAttribute("proposal", p1);
+		
 		return "viewProposal";
 	}
 
 	@KafkaListener(topics = "newVote")
 	public void listen(String data) {
 		String[] contents = data.split(";");
-		
-		if(contents.length!=2)
+
+		if (contents.length != 2)
 			return;
-		
+
 		Proposal p;
 		int newVote;
 
