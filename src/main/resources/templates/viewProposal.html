@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Proposal</title>
+</head>
+<body>
+  <h1>Proposal</h1>
+  <div id="main">
+    <h2>Description</h2>
+    <p> Description of the proposal... </p>
+  </div>
+  <div id="comments">  
+    <table>
+        <tr>
+        <th>Number</th>
+        <th>User</th>
+        <th>Content</th>
+        <th>Positive votes</th>
+        <th>Negative votes</th>
+       </tr>
+       <tr th:each="comment,iterationStatus  : ${comment}">
+        <td th:text="${iterationStatus.count}">1</td>
+        <td th:text="${comment.user}"></td>
+        <td th:text="${comment.content}"></td>
+        <td th:text="${comment.getPositiveVotes()}"></td>
+        <td th:text="${comment.getNegativeVotes()}"></td>
+       </tr>
+    </table>
+  </div>
+</body>
+</html>

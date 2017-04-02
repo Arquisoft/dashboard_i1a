@@ -105,6 +105,8 @@ public class Proposal extends Votable{
 			return false;
 		return true;
 	}
+
+
 	
 	
 	
