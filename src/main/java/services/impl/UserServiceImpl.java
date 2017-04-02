@@ -12,14 +12,10 @@ import persistence.repositories.UserRepository;
 import services.UserService;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
 
-	private UserRepository repository;
-	
 	@Autowired
-	public UserServiceImpl(UserRepository repository) {
-		this.repository = repository;
-	}
+	private UserRepository repository;
 
 	@Override
 	public void save(User user) {
@@ -35,11 +31,6 @@ public class UserServiceImpl implements UserService {
 				users.add(it.next());
 		}
 		return users;
-	}
-
-	@Override
-	public void delete(User user) {
-		repository.delete(user);
 	}
 
 	@Override
