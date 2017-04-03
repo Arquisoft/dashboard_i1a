@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import persistence.model.Association;
 import persistence.model.Comment;
 import persistence.model.Proposal;
+import persistence.model.Topic;
 import persistence.model.User;
 
 @Controller
@@ -38,6 +39,14 @@ public class MainController {
 		// put the proposal in the map
 		Proposal p1 = new Proposal();
 
+		p1.setTitle("Liberate snakes through the city");
+		p1.setContent("We all hate rats, we should set"
+				+ " some snakes free to eat them, once"
+				+ " the rats are extinct we can throw the snakes in Gijón");
+		p1.setMinVotes(1000);
+		p1.setTopic(Topic.HEALTHCARE);
+		p1.setNumberOfVotes(890);
+		
 		// Comentario de prueba 1
 		Comment c1 = new Comment();
 		Association.MakeComment.link(new User(), c1, p1);

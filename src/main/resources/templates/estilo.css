@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+@charset "UTF-8";
 
-<title>Index</title>
-<style>
+@import url("http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Droid+Serif:700|Open+Sans:400italic,700italic,400,700");
+
 body {
     font-family: 'Open Sans', sans-serif;
     color: #394b4b;
@@ -101,52 +99,9 @@ footer {
 #main {
     padding: 30px;
 }
-</style>
-</head>
-<body>
-<h1>Individual proposal view</h1>
-  <div id="main">
-    <div id="comments">
-      <h2 class="header">Proposal</h2>
-      <table style="width:100%">
-        <tr>
-          <th>Title:</th>
-          <td th:text="${proposal.getTitle()}"></td>
-        </tr>
-        <tr>
-          <th>Total votes:</th>
-          <td th:text="${proposal.getNumberOfVotes()}"/>
-        </tr>
-        <tr>
-          <th>Topic:</th>
-          <td th:text="${proposal.getTopic()}"></td>
-        </tr>
-        <tr>
-          <th>Minimum votes:</th>
-          <td th:text="${proposal.getMinVotes()}"></td>
-        </tr>
-        <tr>
-          <th>Content:</th>
-          <td th:text="${proposal.getContent()}"></td>
-        </tr>
-      </table>
-    </div>
-    <div id="comments">
-      <h2 class="header">Comments</h2>
-			<table>
-				<tr>
-					<th>Votes</th>
-					<th>User</th>
-					<th>Comment</th>
-			   </tr>
-			   <tr th:each="comment : ${proposal.getComments()}">
-			        <td th:text="${comment.getNumberOfVotes()}"></td>
-					<td th:text="${comment.getUser().getName()}"></td>
-					<td th:text="${comment.getContent()}"></td>
-			   </tr>
-			</table>
 
-        </div>
-</div>
-</body>
-</html>
+figure pre {
+    padding-left: 2em;
+		font-family: 'Source Code Pro', monospace;
+		font-size: 0.8em;
+}
