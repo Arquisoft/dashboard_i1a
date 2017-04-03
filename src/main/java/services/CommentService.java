@@ -13,4 +13,5 @@ public interface CommentService {
 	List<Comment> findAll();
 	List<Comment> findByProposal(Proposal proposal);
 	List<Comment> findByUser(User user);
+	void delete(Comment comment);
 }

@@ -54,4 +54,9 @@ public class CommentServiceImpl implements CommentService{
 		return repository.findOne(id) != null;
 	}
 
+	@Override
+	public void delete(Comment comment) {
+		repository.delete(comment);		
+	}
+
 }

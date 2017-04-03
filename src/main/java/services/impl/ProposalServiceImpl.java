@@ -41,4 +41,9 @@ public class ProposalServiceImpl implements ProposalService{
 		return repository.findOne(id) != null;
 	}
 
+	@Override
+	public void delete(Proposal proposal) {
+		repository.delete(proposal);		
+	}
+
 }

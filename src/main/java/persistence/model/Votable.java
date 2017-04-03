@@ -32,37 +32,6 @@ public abstract class Votable {
 	Set<Vote> _getVotes() {
 		return votes;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((votes == null) ? 0 : votes.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Votable other = (Votable) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (votes == null) {
-			if (other.votes != null)
-				return false;
-		} else if (!votes.equals(other.votes))
-			return false;
-		return true;
-	}
 	
 	public int getNumberOfVotes() {
 		return numberOfVotes;
@@ -70,6 +39,10 @@ public abstract class Votable {
 
 	public void setNumberOfVotes(int numberOfVotes) {
 		this.numberOfVotes = numberOfVotes;
+	}
+	
+	public void addVote(){
+		numberOfVotes++;
 	}
 	
 }

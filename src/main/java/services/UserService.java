@@ -9,4 +9,5 @@ public interface UserService {
 	void save(User user);
 	boolean checkExists(Long id);
 	List<User> findAll();
+	void delete(User user);
 }

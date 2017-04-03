@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService{
 		return repository.findOne(id) != null;
 	}
 
+	@Override
+	public void delete(User user) {
+		repository.delete(user);
+	}
+
 }

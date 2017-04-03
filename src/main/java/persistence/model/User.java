@@ -181,5 +181,24 @@ public class User {
 	public Set<Vote> getVotes() {
 		return new HashSet<Vote>(votes);
 	}
-
+	
+	public void makeProposal(Proposal proposal){
+		Association.MakeProposal.link(this,proposal);
+	}
+	
+	public void vote(Vote vote, Votable votable){
+		Association.Votation.link(this, vote, votable);
+	}
+	
+	public void comment(Proposal proposal, Comment comment){
+		Association.MakeComment.link(this,comment,proposal);
+	}
+	
+	public void deleteProposal(Proposal proposal){
+		Association.MakeProposal.unlink(this,proposal);
+	}	
+	
+	public void deleteComment(Proposal proposal, Comment comment){
+		Association.MakeComment.unlink(this,comment,proposal);
+	}
 }

@@ -19,24 +19,14 @@ public class Vote implements Serializable {
 	@Id @ManyToOne
 	private Votable votable;
 	
-	private VoteType voteType;
-
-	private boolean value;
+	private VoteType voteType;	
 
 	Vote() {}
 
-	public Vote(User user, Votable votable, boolean value) {
-		this.value = value;
+	public Vote(User user, Votable votable, VoteType voteType) {
+		this.voteType=voteType;
 		Association.Votation.link(user, this, votable);
 	}	
-
-	public void setValue(boolean value) {
-		this.value = value;
-	}
-	
-	public boolean getValue() {
-		return value;
-	}
 	
 	public void _setUser(User user) {
 		this.user = user;
