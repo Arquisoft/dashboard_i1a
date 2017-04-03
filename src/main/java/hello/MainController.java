@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import persistence.model.Proposal;
 
 @Controller
+@RequestMapping("/")
 public class MainController {
 
 	private static final Logger logger = Logger.getLogger(MainController.class);
@@ -24,8 +25,8 @@ public class MainController {
 
 	
 	private Map<String, Proposal> proposals = generateProposals();
-
-	@RequestMapping("/live")
+	
+	@RequestMapping({"/live","/"})
 	public String landing(Model model) {
 		return "index";
 	}

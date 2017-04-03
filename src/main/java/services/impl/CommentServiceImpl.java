@@ -16,8 +16,12 @@ import services.CommentService;
 @Service
 public class CommentServiceImpl implements CommentService{
 
-	@Autowired
 	private CommentRepository repository;
+	
+	@Autowired
+	public CommentServiceImpl(CommentRepository repository) {
+		this.repository = repository;
+	}
 	
 	@Override
 	public void save(Comment comment) {
