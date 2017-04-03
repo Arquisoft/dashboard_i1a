@@ -20,14 +20,15 @@ import persistence.model.Proposal;
 import persistence.model.User;
 
 @Controller
+@RequestMapping("/")
 public class MainController {
 
 	private static final Logger logger = Logger.getLogger(MainController.class);
 	private List<SseEmitter> sseEmitters = Collections.synchronizedList(new ArrayList<>());
 
 	private Map<String, Proposal> proposals = generateProposals();
-
-	@RequestMapping("/live")
+	
+	@RequestMapping({"/live","/"})
 	public String landing(Model model) {
 		return "index";
 	}

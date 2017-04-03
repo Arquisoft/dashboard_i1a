@@ -1,6 +1,5 @@
 package hello;
 
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -10,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EntityScan("persistence.model")
 @EnableJpaRepositories("persistence.repositories")
-@ComponentScan("services")
+//@ComponentScan("services.impl")
 public class Application {
 
     public static void main(String[] args) {

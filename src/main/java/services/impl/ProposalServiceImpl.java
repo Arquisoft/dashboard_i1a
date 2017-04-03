@@ -14,12 +14,15 @@ import services.ProposalService;
 @Service
 public class ProposalServiceImpl implements ProposalService{
 
-	@Autowired
 	private ProposalRepository repository;
+
+	@Autowired
+	public ProposalServiceImpl(ProposalRepository repository) {
+		this.repository = repository;
+	}
 	
 	public void save(Proposal proposal) {
 		repository.save(proposal);
-
 	}
 
 	@Override
