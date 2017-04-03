@@ -36,6 +36,10 @@ public abstract class Votable {
 	public int getNumberOfVotes() {
 		return numberOfVotes;
 	}
+	
+	public Set<Vote> getVotes(){
+		return new HashSet<Vote>(votes);
+	}
 
 	public void setNumberOfVotes(int numberOfVotes) {
 		this.numberOfVotes = numberOfVotes;

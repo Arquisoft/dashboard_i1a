@@ -100,10 +100,10 @@ public class DatabaseTest {
 		
 		// Voting
 		vote();
-		assertTrue(u1.getVotes().size()==2);
-		//assertEquals(p1.getNumberOfVotes(),2);
-		//assertTrue(p2.getNumberOfVotes()==1);
-		//assertEquals(4,p2.getNumberOfVotes());
+		assertEquals(u1.getVotes().size(),2);
+		assertEquals(p1.getVotes().size(),1);
+		assertEquals(p2.getVotes().size(),2);
+		assertEquals(2,p2.getVotes().size());
 		
 	}	
 
