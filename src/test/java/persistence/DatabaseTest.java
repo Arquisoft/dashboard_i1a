@@ -31,9 +31,6 @@ import asw.services.UserService;
 @Component
 public class DatabaseTest {
 
-	// @Value("${local.server.port}")
-	// private int port;
-	// private URL base;
 	private User u1, u2, u3, u4;
 	private Proposal p1, p2, p3, p4;
 	private Comment c1, c2, c3, c4;
@@ -47,15 +44,15 @@ public class DatabaseTest {
 	@Before
 	public void setUp() {
 		initializeData();
-		try{
+		try {
 			addUsers();
 			addProposals();
 			addComments();
-		} catch(DataIntegrityViolationException e){
+		} catch (DataIntegrityViolationException e) {
 			System.out.println("Reinserting data");
 		}
 	}
-	
+
 	@Test
 	public void testServices() {
 		assertTrue(uS.findAll().size() == 4);
@@ -79,30 +76,30 @@ public class DatabaseTest {
 		assertTrue(cS.checkExists(c2.getId()));
 		assertTrue(cS.checkExists(c3.getId()));
 		assertTrue(cS.checkExists(c4.getId()));
-		
+
 		// Making Proposals
-		
+
 		makeProposals();
-		assertTrue(u1.getProposals().size()==3);
-		assertTrue(u2.getProposals().size()==1);
-		
+		assertTrue(u1.getProposals().size() == 3);
+		assertTrue(u2.getProposals().size() == 1);
+
 		// Commenting
 		comments();
-		assertTrue(u1.getComments().size()==3);
-		assertTrue(p1.getComments().size()==2);
-		assertTrue(p2.getComments().size()==1);
-		assertTrue(p3.getComments().size()==1);
-		assertEquals(u2.getComments().size(),2);
-		//assertEquals(u3.getComments().size(),2);
-		
+		assertTrue(u1.getComments().size() == 3);
+		assertTrue(p1.getComments().size() == 2);
+		assertTrue(p2.getComments().size() == 1);
+		assertTrue(p3.getComments().size() == 1);
+		assertEquals(u2.getComments().size(), 2);
+		// assertEquals(u3.getComments().size(),2);
+
 		// Voting
 		vote();
-		assertEquals(u1.getVotes().size(),2);
-		assertEquals(p1.getVotes().size(),1);
-		assertEquals(p2.getVotes().size(),2);
-		assertEquals(2,p2.getVotes().size());
-		
-	}	
+		assertEquals(u1.getVotes().size(), 2);
+		assertEquals(p1.getVotes().size(), 1);
+		assertEquals(p2.getVotes().size(), 2);
+		assertEquals(2, p2.getVotes().size());
+
+	}
 
 	private void initializeData() {
 		initializeUsers();
@@ -137,7 +134,7 @@ public class DatabaseTest {
 		uS.save(u1);
 		uS.save(u2);
 		uS.save(u3);
-		uS.save(u4);		
+		uS.save(u4);
 	}
 
 	private void addProposals() {
@@ -153,25 +150,25 @@ public class DatabaseTest {
 		cS.save(c3);
 		cS.save(c4);
 	}
-	
-	private void makeProposals(){
+
+	private void makeProposals() {
 		u1.makeProposal(p1);
 		u2.makeProposal(p2);
 		u1.makeProposal(p3);
 		u1.makeProposal(p4);
 	}
-	
-	private void comments(){
+
+	private void comments() {
 		u1.comment(p1, c1);
 		u1.comment(p2, c2);
 		u2.comment(p3, c3);
 		u3.comment(p1, c3);
 	}
-	
-	private void vote(){
-		u1.vote(new Vote(u1,p1,VoteType.POSITIVE), p1);
-		u1.vote(new Vote(u1,p2,VoteType.POSITIVE), p2);
-		u3.vote(new Vote(u3,p2,VoteType.POSITIVE), p2);
+
+	private void vote() {
+		u1.vote(new Vote(u1, p1, VoteType.POSITIVE), p1);
+		u1.vote(new Vote(u1, p2, VoteType.POSITIVE), p2);
+		u3.vote(new Vote(u3, p2, VoteType.POSITIVE), p2);
 	}
 
 }
