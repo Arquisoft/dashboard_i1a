@@ -1,4 +1,4 @@
-package cucumber;
+package ccmber;
 
 import org.junit.runner.RunWith;
 
