@@ -22,7 +22,7 @@ public class MockProposalGenerator {
 	 */
 	public String generate(){
 		Random r = new Random();
-//		int randomPos = ThreadLocalRandom.current().nextInt(proposalRepository.findAll().size());
+//		int randomPos = r.nextInt(proposalRepository.findAll().size());
 //		String vote = String.valueOf(proposalRepository.findAll().get(randomPos).getId());
 		
 		String vote = String.valueOf(r.nextLong());
