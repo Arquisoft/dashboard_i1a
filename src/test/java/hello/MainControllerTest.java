@@ -42,10 +42,11 @@ public class MainControllerTest {
 	public void getLanding() throws Exception {
 		String userURI = base.toString() + "/user";  
 		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
-		assertThat(response.getBody(), containsString("comments"));
-		assertThat(response.getBody(), containsString("proposals"));
-		assertThat(response.getBody(), containsString("users"));
-		assertThat(response.getBody(), containsString("profile"));
+		assertThat(response.getBody(), containsString("Votations live broadcast"));
+		assertThat(response.getBody(), containsString("Number"));
+		assertThat(response.getBody(), containsString("Votes"));
+		assertThat(response.getBody(), containsString("Proposal"));
+		assertThat(response.getBody(), containsString("Topic"));
 	}
 	
 	@Test
