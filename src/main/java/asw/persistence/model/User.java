@@ -45,14 +45,14 @@ public class User {
 	public User(String name, String surname, String password, String email, String nationality, String DNI,
 			String address, Date birthDate) {
 		super();
-		this.name = name;
-		this.surname = surname;
-		this.password = password;
-		this.email = email;
-		this.nationality = nationality;
-		this.DNI = DNI;
-		this.address = address;
-		this.birthDate = birthDate;
+		setName(name);
+		setSurname(surname);
+		setPassword(password);
+		setEmail(email);
+		setNationality(nationality);
+		setDNI(DNI);
+		setAddress(address);
+		setBirthDate(birthDate);
 	}
 
 	public Long getId() {

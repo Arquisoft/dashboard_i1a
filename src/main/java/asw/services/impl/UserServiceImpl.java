@@ -18,19 +18,19 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	public UserServiceImpl(UserRepository repository) {
-		this.repository = repository;
+		setRepository(repository);
 	}
 
 	@Override
 	public void save(User user) {
-		repository.save(user);
+		getRepository().save(user);
 	}
 
 	@Override
 	public List<User> findAll() {
 		List<User> users = new ArrayList<>();
-		if (repository.findAll() != null) {
-			Iterator<User> it = repository.findAll().iterator();
+		if (getRepository().findAll() != null) {
+			Iterator<User> it = getRepository().findAll().iterator();
 			while (it.hasNext())
 				users.add(it.next());
 		}
@@ -39,12 +39,20 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean checkExists(Long id) {
-		return repository.findOne(id) != null;
+		return getRepository().findOne(id) != null;
 	}
 
 	@Override
 	public void delete(User user) {
-		repository.delete(user);
+		getRepository().delete(user);
+	}
+	
+	private void setRepository(UserRepository repository){
+		this.repository = repository;
+	}
+	
+	private UserRepository getRepository(){
+		return this.repository;
 	}
 
 }

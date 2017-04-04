@@ -14,7 +14,7 @@ public class MockProposalGenerator {
 	private ProposalService proposalRepository;
 	
 	/**
-	 * Generates a random vote of the form idProposal;symbol where wymbol is either "+" or "-".
+	 * Generates a random vote of the form idProposal;symbol where symbol is either "+" or "-".
 	 * 
 	 * The id of the proposal as well as the symbol are chosen randomly.
 	 * 
@@ -22,6 +22,7 @@ public class MockProposalGenerator {
 	 */
 	public String generate(){
 		Random r = new Random();
+		
 //		int randomPos = r.nextInt(proposalRepository.findAll().size());
 //		String vote = String.valueOf(proposalRepository.findAll().get(randomPos).getId());
 		

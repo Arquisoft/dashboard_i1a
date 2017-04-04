@@ -20,19 +20,19 @@ public class CommentServiceImpl implements CommentService{
 	
 	@Autowired
 	public CommentServiceImpl(CommentRepository repository) {
-		this.repository = repository;
+		setRepository(repository);
 	}
-	
+
 	@Override
 	public void save(Comment comment) {
-		repository.save(comment);
+		getRepository().save(comment);
 	}
 
 	@Override
 	public List<Comment> findAll() {
 		List<Comment> comments = new ArrayList<>();
-		if (repository.findAll() != null) {
-			Iterator<Comment> it = repository.findAll().iterator();
+		if (getRepository().findAll() != null) {
+			Iterator<Comment> it = getRepository().findAll().iterator();
 			while (it.hasNext())
 				comments.add(it.next());
 		}
@@ -46,17 +46,25 @@ public class CommentServiceImpl implements CommentService{
 
 	@Override
 	public List<Comment> findByUser(User user) {
-		return repository.findByUser(user);
+		return getRepository().findByUser(user);
 	}
 
 	@Override
 	public boolean checkExists(Long id) {
-		return repository.findOne(id) != null;
+		return getRepository().findOne(id) != null;
 	}
 
 	@Override
 	public void delete(Comment comment) {
-		repository.delete(comment);		
+		getRepository().delete(comment);		
+	}
+	
+	private void setRepository(CommentRepository repository) {
+		this.repository = repository;
+	}
+	
+	private CommentRepository getRepository(){
+		return this.repository;
 	}
 
 }
