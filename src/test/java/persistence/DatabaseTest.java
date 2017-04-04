@@ -17,15 +17,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import hello.Application;
-import persistence.model.Comment;
-import persistence.model.Proposal;
-import persistence.model.User;
-import persistence.model.Vote;
-import persistence.model.VoteType;
-import services.CommentService;
-import services.ProposalService;
-import services.UserService;
+import asw.hello.Application;
+import asw.persistence.model.Comment;
+import asw.persistence.model.Proposal;
+import asw.persistence.model.User;
+import asw.persistence.model.Vote;
+import asw.persistence.model.VoteType;
+import asw.services.CommentService;
+import asw.services.ProposalService;
+import asw.services.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
