@@ -80,25 +80,24 @@ public class DatabaseTest {
 		// Making Proposals
 
 		makeProposals();
-		assertTrue(u1.getProposals().size() == 3);
-		assertTrue(u2.getProposals().size() == 1);
+		assertEquals(u1.getProposals().size(), 3);
+		assertEquals(u2.getProposals().size(), 1);
 
 		// Commenting
 		comments();
-		assertTrue(u1.getComments().size() == 3);
-		assertTrue(p1.getComments().size() == 2);
-		assertTrue(p2.getComments().size() == 1);
-		assertTrue(p3.getComments().size() == 1);
+		assertEquals(u1.getComments().size(), 3);
+		assertEquals(p1.getComments().size(), 2);
+		assertEquals(p2.getComments().size(), 2);
+		assertEquals(p3.getComments().size(), 1);
 		assertEquals(u2.getComments().size(), 2);
-		// assertEquals(u3.getComments().size(),2);
+		assertEquals(u3.getComments().size(), 2);
 
 		// Voting
 		vote();
 		assertEquals(u1.getVotes().size(), 2);
 		assertEquals(p1.getVotes().size(), 1);
 		assertEquals(p2.getVotes().size(), 2);
-		assertEquals(2, p2.getVotes().size());
-
+		assertEquals(p2.getVotes().size(), 2);
 	}
 
 	private void initializeData() {
@@ -163,6 +162,8 @@ public class DatabaseTest {
 		u1.comment(p2, c2);
 		u2.comment(p3, c3);
 		u3.comment(p1, c3);
+		u3.comment(p2, c3);
+		u3.comment(p3, c3);
 	}
 
 	private void vote() {

@@ -14,7 +14,7 @@ public class MockProposalGenerator {
 	private ProposalService proposalRepository;
 	
 	/**
-	 * Generates a random vote of the form idProposal;symbol where wymbol is either "+" or "-".
+	 * Generates a random vote of the form idProposal;symbol where symbol is either "+" or "-".
 	 * 
 	 * The id of the proposal as well as the symbol are chosen randomly.
 	 * 
