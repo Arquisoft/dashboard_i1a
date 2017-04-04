@@ -1,7 +1,7 @@
 package hello;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import java.net.URL;
 
@@ -18,7 +18,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
 import asw.hello.Application;
-import asw.hello.UserInfo;
+import asw.hello.UserCredentials;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
@@ -41,20 +41,28 @@ public class MainControllerTest {
 
 	@Test
 	public void getLanding() throws Exception {
-		String userURI = base.toString() + "/user";  
 		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
+		/**
+		assertThat(response.getBody(), containsString("Username:"));
+		assertThat(response.getBody(), containsString("Password:"));
+		assertThat(response.getBody(), containsString("Submit"));
+		assertThat(response.getBody(), containsString("Reset"));
+		*/	
+	}
+	
+	@Test
+	public void getAdmin() throws Exception {		
+		UserCredentials admin = new UserCredentials("admin","admin");
+		assertEquals("admin",admin.getUsername());
+		assertEquals("admin",admin.getPassword());
+		base=new URL("http://localhost:" + port + "/admin.html");
+		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
+		/**
 		assertThat(response.getBody(), containsString("Votations live broadcast"));
 		assertThat(response.getBody(), containsString("Number"));
 		assertThat(response.getBody(), containsString("Votes"));
 		assertThat(response.getBody(), containsString("Proposal"));
 		assertThat(response.getBody(), containsString("Topic"));
+		*/		
 	}
-	
-	@Test
-	public void getUser() throws Exception {
-		String userURI = base.toString() + "/user";  
-		ResponseEntity<String> response = template.getForEntity(userURI, String.class);
-		UserInfo expected = new UserInfo("pepe",0);
-	}
-
 }

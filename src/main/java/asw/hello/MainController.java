@@ -6,11 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
+import org.springframework.http.MediaType;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -29,9 +33,26 @@ public class MainController {
 
 	private Map<String, Proposal> proposals = generateProposals();
 	
-	@RequestMapping({"/live","/"})
+	@RequestMapping({"/"})
 	public String landing(Model model) {
-		return "index";
+		model.addAttribute("credentials",new UserCredentials());
+		return "login";
+	}
+	
+	  @PostMapping(value = "/login", produces = MediaType.TEXT_HTML_VALUE)
+	    public String hola(@ModelAttribute UserCredentials credentials, Model model, HttpServletRequest request) {
+	    String username = credentials.getUsername();
+	    String pass = credentials.getPassword();		
+	    
+		if (username.equals("admin") && pass.equals("admin")) {			
+		    request.getSession().setAttribute("loggedUser", "admin");
+		    return "admin";
+		}
+		else if(username.equals("council") && pass.equals("council")){
+			request.getSession().setAttribute("loggedUser", "council");
+			return "council";
+		} else
+		    return "";
 	}
 
 	@RequestMapping("/viewProposal")
