@@ -27,7 +27,7 @@ public class KafkaProposalProducer {
 	    	
 	    	String proposal = generator.generate();
 	    	
-	        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send("exampleTopic", proposal);
+	        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send("newVote", proposal);
 	        future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
 	            @Override
 	            public void onSuccess(SendResult<String, String> result) {
