@@ -24,6 +24,7 @@ import asw.hello.UserInfo;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest({"server.port=0"})
+@SuppressWarnings({"deprecation","unused"})
 public class MainControllerTest {
 
     @Value("${local.server.port}")

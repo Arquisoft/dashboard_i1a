@@ -36,7 +36,6 @@ public class MainController {
 
 	@RequestMapping("/viewProposal")
 	public String viewProposal(Model model, Long id) {
-		// put the proposal in the map
 		Proposal p1 = new Proposal();
 
 		p1.setTitle("Liberate snakes through the city");
@@ -47,12 +46,10 @@ public class MainController {
 		p1.setTopic(Topic.HEALTHCARE);
 		p1.setNumberOfVotes(890);
 		
-		// Comentario de prueba 1
 		Comment c1 = new Comment();
 		Association.MakeComment.link(new User(), c1, p1);
 		c1.setContent("pole");
 
-		// Comentario de prueba 2
 		Comment c2 = new Comment();
 		c2.setContent("No te lo perdonare Carmena");
 		Association.MakeComment.link(new User(), c2, p1);
@@ -110,6 +107,14 @@ public class MainController {
 
 	public void setProposals(Map<String, Proposal> proposals) {
 		this.proposals = proposals;
+	}
+
+	public List<SseEmitter> getSseEmitters() {
+		return sseEmitters;
+	}
+
+	public void setSseEmitters(List<SseEmitter> sseEmitters) {
+		this.sseEmitters = sseEmitters;
 	}
 
 }

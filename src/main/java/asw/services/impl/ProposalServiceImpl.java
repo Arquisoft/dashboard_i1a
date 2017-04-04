@@ -18,18 +18,18 @@ public class ProposalServiceImpl implements ProposalService{
 
 	@Autowired
 	public ProposalServiceImpl(ProposalRepository repository) {
-		this.repository = repository;
+		setRepository(repository);
 	}
 	
 	public void save(Proposal proposal) {
-		repository.save(proposal);
+		getRepository().save(proposal);
 	}
 
 	@Override
 	public List<Proposal> findAll() {
 		List<Proposal> proposals = new ArrayList<>();
-		if (repository.findAll() != null) {
-			Iterator<Proposal> it = repository.findAll().iterator();
+		if (getRepository().findAll() != null) {
+			Iterator<Proposal> it = getRepository().findAll().iterator();
 			while (it.hasNext())
 				proposals.add(it.next());
 		}
@@ -38,12 +38,20 @@ public class ProposalServiceImpl implements ProposalService{
 
 	@Override
 	public boolean checkExists(Long id) {
-		return repository.findOne(id) != null;
+		return getRepository().findOne(id) != null;
 	}
 
 	@Override
 	public void delete(Proposal proposal) {
-		repository.delete(proposal);		
+		getRepository().delete(proposal);		
+	}
+	
+	private void setRepository(ProposalRepository repository){
+		this.repository = repository;
+	}
+	
+	private ProposalRepository getRepository(){
+		return this.repository;
 	}
 
 }
