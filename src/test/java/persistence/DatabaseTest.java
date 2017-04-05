@@ -60,6 +60,18 @@ public class DatabaseTest {
 		assertTrue(uS.checkExists(u2.getId()));
 		assertTrue(uS.checkExists(u3.getId()));
 		assertTrue(uS.checkExists(u4.getId()));
+		
+		// User Data 
+		assertEquals("Gonzalo",u1.getName());
+		assertEquals("Menéndez Borge",u1.getSurname());
+		assertEquals("contraseña1",u1.getPassword());
+		assertEquals("mail1",u1.getEmail());
+		assertEquals("Spain",u1.getNationality());
+		assertEquals("1111",u1.getDNI());
+		assertEquals("Address1",u1.getAddress());
+		assertEquals(new Date(2500000),u1.getBirthDate());
+		u1.setId(new Long(5));
+		assertEquals(new Long(5), u1.getId());
 
 		// Proposals
 
@@ -82,6 +94,8 @@ public class DatabaseTest {
 		makeProposals();
 		assertEquals(u1.getProposals().size(), 3);
 		assertEquals(u2.getProposals().size(), 1);
+		p1.addVote();
+		assertEquals(p1.getNumberOfVotes(),p1.getVotes().size()+1);
 
 		// Commenting
 		comments();
@@ -97,7 +111,16 @@ public class DatabaseTest {
 		assertEquals(u1.getVotes().size(), 2);
 		assertEquals(p1.getVotes().size(), 1);
 		assertEquals(p2.getVotes().size(), 2);
-		assertEquals(p2.getVotes().size(), 2);
+		assertEquals(p2.getVotes().size(), 2);		
+		
+		
+		// Deleting data
+		
+		try{
+			deleteData();
+		}catch(Exception e){
+			System.out.println("Integrity Error...");
+		}
 	}
 
 	private void initializeData() {
@@ -105,9 +128,36 @@ public class DatabaseTest {
 		initializeProposals();
 		initializeComments();
 	}
+	
+	private void deleteData(){
+		deleteUsers();
+		deleteProposals();
+		deleteComments();
+	}
+	
+	private void deleteComments() {
+		cS.delete(c1);
+		cS.delete(c2);
+		cS.delete(c3);
+		cS.delete(c4);	
+	}
+
+	private void deleteProposals() {
+		pS.delete(p1);
+		pS.delete(p2);
+		pS.delete(p3);
+		pS.delete(p4);		
+	}
+
+	private void deleteUsers(){
+		uS.delete(u1);
+		uS.delete(u2);
+		uS.delete(u3);
+		uS.delete(u4);
+	}
 
 	private void initializeUsers() {
-		u1 = new User("Gonzalo", "Menéndez Borge", "contraseña1", "mail1", "Spain", "1111", "Address1", new Date());
+		u1 = new User("Gonzalo", "Menéndez Borge", "contraseña1", "mail1", "Spain", "1111", "Address1", new Date(2500000));
 		u2 = new User("Jorge", "López Alonso", "contraseña2", "mail2", "Spain", "2222", "Address2", new Date());
 		u3 = new User("Julián", "García Murias", "contraseña3", "mail3", "Spain", "3333", "Address3", new Date());
 		u4 = new User("Sergio", "Mosquera Dopico", "contraseña4", "mail4", "Spain", "4444", "Address4", new Date());
