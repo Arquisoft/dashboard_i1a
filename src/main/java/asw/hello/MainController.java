@@ -29,7 +29,9 @@ public class MainController {
 	@Autowired
 	private ProposalsLiveHandler proposals;
 
-	@RequestMapping(value = "/admin")
+	
+	
+	@RequestMapping(value = {"/admin", "/" })
 	public String admin() {
 		return "admin";
 	}
