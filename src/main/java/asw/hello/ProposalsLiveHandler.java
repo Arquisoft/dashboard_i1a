@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ import asw.persistence.model.User;
 import asw.services.ProposalService;
 
 @Component
+@Scope("singleton")
 public class ProposalsLiveHandler {
 
 	private static final Logger logger = Logger.getLogger(MainController.class);
@@ -30,32 +32,33 @@ public class ProposalsLiveHandler {
 
 	@KafkaListener(topics = "newVote")
 	public void listen(String data) {
-		// String[] contents = data.split(";");
-		//
-		// if (contents.length != 2)
-		// return;
-		//
-		// Proposal p;
-		// int newVote;
-		//
-		// if (proposals.containsKey(contents[0]))
-		// p = proposals.get(contents[0]);
+		String[] contents = data.split(";");
+
+		if (contents.length != 2)
+			return;
+
+		Proposal p;
+		int newVote;
+
+		if (proposals.containsKey(contents[0])) {
+			p = proposals.get(contents[0]);
+
+			if (contents[1].equals("+"))
+				newVote = +1;
+			else if (contents[1].equals("-"))
+				newVote = -1;
+			else
+				newVote = 0;
+
+			p.setNumberOfVotes(p.getNumberOfVotes() + newVote);
+		}
 		// else {
 		// p = new Proposal();
 		// p.setTitle(contents[0]);
 		// proposals.put(p.getId(), p);
 		// }
-		//
-		// if (contents[1].equals("+"))
-		// newVote = +1;
-		// else if (contents[1].equals("-"))
-		// newVote = -1;
-		// else
-		// newVote = 0;
-		//
-		// p.setNumberOfVotes(p.getNumberOfVotes() + newVote);
-		//
-		// logger.info("New message received: \"" + data + "\"");
+
+		logger.info("New message received: \"" + data + "\"");
 	}
 
 	@PostConstruct

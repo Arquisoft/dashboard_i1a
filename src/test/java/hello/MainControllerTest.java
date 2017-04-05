@@ -1,7 +1,6 @@
 package hello;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -28,7 +27,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 import asw.hello.Application;
-import asw.hello.UserCredentials;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
@@ -93,10 +91,7 @@ public class MainControllerTest {
 
 	@Test
 	public void testViewProposal() throws Exception {
-		UserCredentials admin = new UserCredentials("admin", "admin");
-		assertEquals("admin", admin.getUsername());
-		assertEquals("admin", admin.getPassword());
-		base = new URL("http://localhost:" + port + "/viewProposal.html");
+		base = new URL("http://localhost:" + port + "/viewProposal?proposalId=1");
 		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
 		assertThat(response.getBody(), containsString("Title"));
 		assertThat(response.getBody(), containsString("Total votes"));

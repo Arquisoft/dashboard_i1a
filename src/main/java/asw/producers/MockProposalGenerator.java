@@ -26,7 +26,7 @@ public class MockProposalGenerator {
 //		int randomPos = r.nextInt(proposalRepository.findAll().size());
 //		String vote = String.valueOf(proposalRepository.findAll().get(randomPos).getId());
 		
-		String vote = String.valueOf(r.nextLong());
+		String vote = "1";// String.valueOf(r.nextLong());
 		
 		vote += ";";
 		vote += System.currentTimeMillis()%2 == 0 ? "+" : "-";
