@@ -2,15 +2,14 @@ package asw.hello;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +31,13 @@ public class MainController {
 	private static final Logger logger = Logger.getLogger(MainController.class);
 	private List<SseEmitter> sseEmitters = Collections.synchronizedList(new ArrayList<>());
 
-	private Map<String, Proposal> proposals = generateProposals();
+	
+	
 	private String currentPage = "login";
 
+	@Autowired
+	private ProposalsLiveHandler proposals;
+	
 	@RequestMapping("/")
 	public String landing(Model model) {
 		model.addAttribute("credentials", new UserCredentials());
@@ -101,54 +104,13 @@ public class MainController {
 		return getCurrentPage();
 	}
 
-	@KafkaListener(topics = "newVote")
-	public void listen(String data) {
-		String[] contents = data.split(";");
 
-		if (contents.length != 2)
-			return;
 
-		Proposal p;
-		int newVote;
 
-		if (proposals.containsKey(contents[0]))
-			p = proposals.get(contents[0]);
-		else {
-			p = new Proposal();
-			p.setTitle(contents[0]);
-			proposals.put(p.getTitle(), p);
-		}
-
-		if (contents[1].equals("+"))
-			newVote = +1;
-		else if (contents[1].equals("-"))
-			newVote = -1;
-		else
-			newVote = 0;
-
-		p.setNumberOfVotes(p.getNumberOfVotes() + newVote);
-
-		logger.info("New message received: \"" + data + "\"");
-	}
-
-	private static Map<String, Proposal> generateProposals() {
-		Map<String, Proposal> lista = new HashMap<String, Proposal>();
-
-		Proposal p = new Proposal();
-		p.setTitle("tituloPrueba");
-
-		lista.put("tituloPrueba", p);
-
-		return lista;
-	}
 
 	@ModelAttribute("proposals")
-	public Map<String, Proposal> getProposals() {
-		return proposals;
-	}
-
-	public void setProposals(Map<String, Proposal> proposals) {
-		this.proposals = proposals;
+	public Map<Long, Proposal> getProposals() {
+		return proposals.getMap();
 	}
 
 	public List<SseEmitter> getSseEmitters() {

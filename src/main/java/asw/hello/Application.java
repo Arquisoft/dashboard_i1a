@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan("asw.persistence.model")
-@EnableJpaRepositories("asw.persistence.repositories")
+@EntityScan(basePackages="asw")
+@EnableJpaRepositories(basePackages="asw")
 @ComponentScan(basePackages="asw")
 public class Application {
 
