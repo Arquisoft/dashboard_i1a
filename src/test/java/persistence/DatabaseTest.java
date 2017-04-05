@@ -1,6 +1,7 @@
 package persistence;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
@@ -81,7 +82,7 @@ public class DatabaseTest {
 
 		// Proposals
 
-		assertTrue(pS.findAll().size() == 4);
+		assertTrue(pS.findAll().size() == 5);
 		assertTrue(pS.checkExists(p1.getId()));
 		assertTrue(pS.checkExists(p2.getId()));
 		assertTrue(pS.checkExists(p3.getId()));
@@ -122,7 +123,12 @@ public class DatabaseTest {
 		u1.deleteComment(p1, c1);		
 		u1.deleteProposal(p1);		
 		assertEquals(u1.getComments().size(),2);
-		assertEquals(u1.getProposals().size(),2);		
+		assertEquals(u1.getProposals().size(),2);	
+		
+		// Equals assertions
+		assertEquals(p1,p1);
+		assertEquals(u1,u1);
+		assertEquals(c1,c1);		
 	}
 
 	private void initializeData() {
