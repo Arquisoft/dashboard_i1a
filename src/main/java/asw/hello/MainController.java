@@ -5,16 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -41,9 +36,9 @@ public class MainController {
 
 	@RequestMapping("/viewProposal")
 	public String viewProposal(Model model, Long proposalId) {
-
+		// Check the correctness of the parameter
 		if (proposalId != null) {
-
+			// Search for the chosen proposal on the database
 			Proposal p = pService.findById(proposalId);
 
 			if (p != null) {

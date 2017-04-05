@@ -25,11 +25,20 @@ public class ProposalsLiveHandler {
 
 	private static final Logger logger = Logger.getLogger(MainController.class);
 
+	/**
+	 * The proposals for the live window, mapped by id in order to be much faster
+	 */
 	private Map<Long, Proposal> proposals;// = generateProposals();
 
 	@Autowired
 	private ProposalService pService;
 
+	/**
+	 * When new vote arrives, the data is updated here, NOT updated on the database,
+	 * participation team will handle that, we need speed, not consistency.
+	 * 
+	 * @param data
+	 */
 	@KafkaListener(topics = "newVote")
 	public void listen(String data) {
 		String[] contents = data.split(";");
@@ -61,6 +70,9 @@ public class ProposalsLiveHandler {
 		logger.info("New message received: \"" + data + "\"");
 	}
 
+	/**
+	 * Do the initial search on the database
+	 */
 	@PostConstruct
 	private void updateProposalsFromDatabase() {
 
