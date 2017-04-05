@@ -72,6 +72,12 @@ public class DatabaseTest {
 		assertEquals(new Date(2500000),u1.getBirthDate());
 		u1.setId(new Long(5));
 		assertEquals(new Long(5), u1.getId());
+		
+		// Comments Data
+		assertEquals("Gonzalo you can't leave us yet, we still have another ASW deliverable"
+				,c1.getContent());
+		assertEquals(u2,c1.getUser());
+		assertEquals(p1,c1.getProposal());
 
 		// Proposals
 
@@ -108,12 +114,15 @@ public class DatabaseTest {
 
 		// Voting
 		vote();
-		assertEquals(u1.getVotes().size(), 2);
-		assertEquals(p1.getVotes().size(), 1);
-		assertEquals(p2.getVotes().size(), 2);
-		assertEquals(p2.getVotes().size(), 2);		
+		assertEquals(u1.getVotes().size(), 3);
+		assertEquals(p1.getVotes().size(), 2);		
+		assertEquals(p2.getVotes().size(), 1);		
 		
-		
+		// Removing the comment/proposal
+		u1.deleteComment(p1, c1);		
+		u1.deleteProposal(p1);		
+		assertEquals(u1.getComments().size(),2);
+		assertEquals(u1.getProposals().size(),2);
 		// Deleting data
 		
 		try{
@@ -216,10 +225,14 @@ public class DatabaseTest {
 		u3.comment(p3, c3);
 	}
 
+	@SuppressWarnings("unused")
 	private void vote() {
-		u1.vote(new Vote(u1, p1, VoteType.POSITIVE), p1);
-		u1.vote(new Vote(u1, p2, VoteType.POSITIVE), p2);
-		u3.vote(new Vote(u3, p2, VoteType.POSITIVE), p2);
+		Vote v1=new Vote(u1, p1, VoteType.POSITIVE);		
+		Vote v2=new Vote(u1, p1, VoteType.POSITIVE);
+		Vote v3=new Vote(u1, p2, VoteType.POSITIVE);
+		Vote v4=new Vote(u1, p1, VoteType.POSITIVE);		
+		u1.vote(v4, p1);
+		u1.deleteVote(v4, p1);
 	}
 
 }

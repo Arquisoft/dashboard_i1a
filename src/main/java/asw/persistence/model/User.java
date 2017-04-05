@@ -201,4 +201,8 @@ public class User {
 	public void deleteComment(Proposal proposal, Comment comment){
 		Association.MakeComment.unlink(this,comment,proposal);
 	}
+	
+	public void deleteVote(Vote vote, Proposal proposal){
+		Association.Votation.unlink(this, vote, proposal);
+	}
 }
