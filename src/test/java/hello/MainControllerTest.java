@@ -66,7 +66,7 @@ public class MainControllerTest {
 	public void testGetAdmin() {
 		String body = "";
 		try {
-			MvcResult result = this.mockMvc.perform(post("/login").param("username", "admin").param("password", "admin")
+			MvcResult result = this.mockMvc.perform(post("/admin")
 					.accept(MediaType.TEXT_HTML_VALUE)).andExpect(status().isOk()).andReturn();
 			body = result.getResponse().getContentAsString();
 
