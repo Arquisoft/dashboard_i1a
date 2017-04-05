@@ -18,60 +18,77 @@ import asw.services.ProposalService;
 public class ProposalsLiveHandler {
 
 	private static final Logger logger = Logger.getLogger(MainController.class);
-	
+
 	private Map<Long, Proposal> proposals;// = generateProposals();
-	
+
 	@Autowired
 	private ProposalService pService;
-		
-	
+
 	@KafkaListener(topics = "newVote")
 	public void listen(String data) {
-//		String[] contents = data.split(";");
-//
-//		if (contents.length != 2)
-//			return;
-//
-//		Proposal p;
-//		int newVote;
-//
-//		if (proposals.containsKey(contents[0]))
-//			p = proposals.get(contents[0]);
-//		else {
-//			p = new Proposal();
-//			p.setTitle(contents[0]);
-//			proposals.put(p.getId(), p);
-//		}
-//
-//		if (contents[1].equals("+"))
-//			newVote = +1;
-//		else if (contents[1].equals("-"))
-//			newVote = -1;
-//		else
-//			newVote = 0;
-//
-//		p.setNumberOfVotes(p.getNumberOfVotes() + newVote);
-//
-//		logger.info("New message received: \"" + data + "\"");
+		// String[] contents = data.split(";");
+		//
+		// if (contents.length != 2)
+		// return;
+		//
+		// Proposal p;
+		// int newVote;
+		//
+		// if (proposals.containsKey(contents[0]))
+		// p = proposals.get(contents[0]);
+		// else {
+		// p = new Proposal();
+		// p.setTitle(contents[0]);
+		// proposals.put(p.getId(), p);
+		// }
+		//
+		// if (contents[1].equals("+"))
+		// newVote = +1;
+		// else if (contents[1].equals("-"))
+		// newVote = -1;
+		// else
+		// newVote = 0;
+		//
+		// p.setNumberOfVotes(p.getNumberOfVotes() + newVote);
+		//
+		// logger.info("New message received: \"" + data + "\"");
 	}
-	
-	
-	@PostConstruct 
+
+	@PostConstruct
 	private void updateProposalsFromDatabase() {
+
+//		Proposal p1 = new Proposal();
+//
+//		p1.setTitle("Liberate snakes through the city");
+//		p1.setContent("We all hate rats, we should set" + " some snakes free to eat them, once"
+//				+ " the rats are extinct we can throw the snakes in Gijón");
+//		p1.setMinVotes(1000);
+//		p1.setTopic(Topic.HEALTHCARE);
+//		p1.setNumberOfVotes(890);
+//
+//		Comment c1 = new Comment();
+//		Association.MakeComment.link(new User(), c1, p1);
+//		c1.setContent("pole");
+//
+//		Comment c2 = new Comment();
+//		c2.setContent("No te lo perdonare Carmena");
+//		Association.MakeComment.link(new User(), c2, p1);
+
+
 		Map<Long, Proposal> proposalsMap = new HashMap<Long, Proposal>();
 
 		List<Proposal> proposalsList = pService.findAll();
-		
-		for(Proposal p:proposalsList)
+
+		for (Proposal p : proposalsList)
 			proposalsMap.put(p.getId(), p);
 
-		this.proposals=proposalsMap;
+		this.proposals = proposalsMap;
 		logger.info("Loading proposals from the database");
-	}
 
+	}
 
 	public Map<Long, Proposal> getMap() {
 		return proposals;
 	}
-	
+
 }

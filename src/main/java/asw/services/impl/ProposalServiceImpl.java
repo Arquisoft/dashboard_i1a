@@ -49,4 +49,9 @@ public class ProposalServiceImpl implements ProposalService{
 		return this.repository;
 	}
 
+	@Override
+	public Proposal findById(Long id) {
+		return getRepository().findOne(id);
+	}
+
 }

@@ -9,5 +9,6 @@ public interface ProposalService {
 	void save(Proposal proposal);
 	boolean checkExists(Long id);
 	List<Proposal> findAll();
+	Proposal findById(Long id);
 
 }
