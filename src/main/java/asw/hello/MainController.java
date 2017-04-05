@@ -78,7 +78,7 @@ public class MainController {
 	@RequestMapping("/viewProposal")
 	public String viewProposal(Model model, Long id) {
 		Proposal p1 = new Proposal();
-
+		
 		p1.setTitle("Liberate snakes through the city");
 		p1.setContent("We all hate rats, we should set" + " some snakes free to eat them, once"
 				+ " the rats are extinct we can throw the snakes in Gijón");
