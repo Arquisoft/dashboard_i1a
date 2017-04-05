@@ -42,11 +42,6 @@ public class UserServiceImpl implements UserService{
 		return getRepository().findOne(id) != null;
 	}
 
-	@Override
-	public void delete(User user) {
-		getRepository().delete(user);
-	}
-	
 	private void setRepository(UserRepository repository){
 		this.repository = repository;
 	}

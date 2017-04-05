@@ -122,14 +122,7 @@ public class DatabaseTest {
 		u1.deleteComment(p1, c1);		
 		u1.deleteProposal(p1);		
 		assertEquals(u1.getComments().size(),2);
-		assertEquals(u1.getProposals().size(),2);
-		// Deleting data
-		
-		try{
-			deleteData();
-		}catch(Exception e){
-			System.out.println("Integrity Error...");
-		}
+		assertEquals(u1.getProposals().size(),2);		
 	}
 
 	private void initializeData() {
@@ -138,33 +131,6 @@ public class DatabaseTest {
 		initializeComments();
 	}
 	
-	private void deleteData(){
-		deleteUsers();
-		deleteProposals();
-		deleteComments();
-	}
-	
-	private void deleteComments() {
-		cS.delete(c1);
-		cS.delete(c2);
-		cS.delete(c3);
-		cS.delete(c4);	
-	}
-
-	private void deleteProposals() {
-		pS.delete(p1);
-		pS.delete(p2);
-		pS.delete(p3);
-		pS.delete(p4);		
-	}
-
-	private void deleteUsers(){
-		uS.delete(u1);
-		uS.delete(u2);
-		uS.delete(u3);
-		uS.delete(u4);
-	}
-
 	private void initializeUsers() {
 		u1 = new User("Gonzalo", "Menéndez Borge", "contraseña1", "mail1", "Spain", "1111", "Address1", new Date(2500000));
 		u2 = new User("Jorge", "López Alonso", "contraseña2", "mail2", "Spain", "2222", "Address2", new Date());

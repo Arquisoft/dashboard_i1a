@@ -41,11 +41,6 @@ public class ProposalServiceImpl implements ProposalService{
 		return getRepository().findOne(id) != null;
 	}
 
-	@Override
-	public void delete(Proposal proposal) {
-		getRepository().delete(proposal);		
-	}
-	
 	private void setRepository(ProposalRepository repository){
 		this.repository = repository;
 	}

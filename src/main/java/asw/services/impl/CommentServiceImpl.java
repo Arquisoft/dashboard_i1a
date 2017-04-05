@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import asw.persistence.model.Comment;
-import asw.persistence.model.Proposal;
-import asw.persistence.model.User;
 import asw.persistence.repositories.CommentRepository;
 import asw.services.CommentService;
 
@@ -37,28 +35,13 @@ public class CommentServiceImpl implements CommentService{
 				comments.add(it.next());
 		}
 		return comments;
-	}
-
-	@Override
-	public List<Comment> findByProposal(Proposal proposal) {
-		return repository.findByProposal(proposal);
-	}
-
-	@Override
-	public List<Comment> findByUser(User user) {
-		return getRepository().findByUser(user);
-	}
+	}	
 
 	@Override
 	public boolean checkExists(Long id) {
 		return getRepository().findOne(id) != null;
 	}
 
-	@Override
-	public void delete(Comment comment) {
-		getRepository().delete(comment);		
-	}
-	
 	private void setRepository(CommentRepository repository) {
 		this.repository = repository;
 	}
