@@ -43,7 +43,7 @@ public class LandingSteps {
     this.mvc = MockMvcBuilders.webAppContextSetup(context).build();
     result = mvc.perform(get("/")).andReturn();
   }
-
+//admin
   @Then("^the client receives status code of (\\d+)$")
   public void the_client_receives_status_code_of(int status) throws Throwable {
     assertThat(result.getResponse().getStatus(), is(status));
