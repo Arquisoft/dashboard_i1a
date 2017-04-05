@@ -76,14 +76,16 @@ public class MainController {
 	}
 
 	@RequestMapping("/viewProposal")
-	public String viewProposal(Model model, Long id) {
-		Proposal p = pService.findById(id);
+	public String viewProposal(Model model, Long proposalId) {
+		if (proposalId != null) {
+			
+			Proposal p = pService.findById(proposalId);
 
-		if (p != null) {
-			model.addAttribute("proposal", p);
-			setCurrentPage("viewProposal");
+			if (p != null) {
+				model.addAttribute("proposal", p);
+				setCurrentPage("viewProposal");
+			}
 		}
-		
 		return getCurrentPage();
 	}
 

@@ -82,7 +82,7 @@ footer p, footer time {
 				<td th:text="${iterationStatus.count}">1</td>
 				<td th:text="${proposal.getValue().getNumberOfVotes()}"></td>
 				<td> <a th:text="${proposal.getValue().getTitle()}"
-							th:href="@{viewProposal(proposalId=${proposal.getValue().getId()})}"/></td>
+							th:href="@{viewProposal?(proposalId=${proposal.getValue().getId()})}"/></td>
 				<td th:text="${proposal.getValue().getTopic()}"></td>
 			</tr>
 		</table>

@@ -11,7 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import asw.persistence.model.Association;
+import asw.persistence.model.Comment;
 import asw.persistence.model.Proposal;
+import asw.persistence.model.Topic;
+import asw.persistence.model.User;
 import asw.services.ProposalService;
 
 @Component
@@ -57,23 +61,24 @@ public class ProposalsLiveHandler {
 	@PostConstruct
 	private void updateProposalsFromDatabase() {
 
-//		Proposal p1 = new Proposal();
-//
-//		p1.setTitle("Liberate snakes through the city");
-//		p1.setContent("We all hate rats, we should set" + " some snakes free to eat them, once"
-//				+ " the rats are extinct we can throw the snakes in Gijón");
-//		p1.setMinVotes(1000);
-//		p1.setTopic(Topic.HEALTHCARE);
-//		p1.setNumberOfVotes(890);
-//
-//		Comment c1 = new Comment();
-//		Association.MakeComment.link(new User(), c1, p1);
-//		c1.setContent("pole");
-//
-//		Comment c2 = new Comment();
-//		c2.setContent("No te lo perdonare Carmena");
-//		Association.MakeComment.link(new User(), c2, p1);
+		Proposal p1 = new Proposal();
 
+		p1.setTitle("Liberate snakes through the city");
+		p1.setContent("We all hate rats, we should set" + " some snakes free to eat them, once"
+				+ " the rats are extinct we can throw the snakes in Gijón");
+		p1.setMinVotes(1000);
+		p1.setTopic(Topic.HEALTHCARE);
+		p1.setNumberOfVotes(890);
+
+		Comment c1 = new Comment();
+		Association.MakeComment.link(new User(), c1, p1);
+		c1.setContent("pole");
+
+		Comment c2 = new Comment();
+		c2.setContent("No te lo perdonare Carmena");
+		Association.MakeComment.link(new User(), c2, p1);
+
+		pService.save(p1);
 
 		Map<Long, Proposal> proposalsMap = new HashMap<Long, Proposal>();
 
