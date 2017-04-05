@@ -40,8 +40,8 @@ public class ProposalsLiveHandler {
 		Proposal p;
 		int newVote;
 
-		if (proposals.containsKey(contents[0])) {
-			p = proposals.get(contents[0]);
+		if (proposals.containsKey(Long.parseLong(contents[0]))) {
+			p = proposals.get(Long.parseLong(contents[0]));
 
 			if (contents[1].equals("+"))
 				newVote = +1;
