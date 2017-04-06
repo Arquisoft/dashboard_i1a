@@ -17,7 +17,9 @@ import asw.persistence.model.Comment;
 import asw.persistence.model.Proposal;
 import asw.persistence.model.Topic;
 import asw.persistence.model.User;
+import asw.services.CommentService;
 import asw.services.ProposalService;
+import asw.services.UserService;
 
 @Component
 @Scope("singleton")
@@ -26,12 +28,19 @@ public class ProposalsLiveHandler {
 	private static final Logger logger = Logger.getLogger(MainController.class);
 
 	/**
-	 * The proposals for the live window, mapped by id in order to be much faster
+	 * The proposals for the live window, mapped by id in order to be much
+	 * faster
 	 */
 	private Map<Long, Proposal> proposals;// = generateProposals();
 
 	@Autowired
 	private ProposalService pService;
+
+	@Autowired
+	private CommentService cService;
+	
+	@Autowired
+	private UserService uService;
 
 	/**
 	 * When new vote arrives, the data is updated here, NOT updated on the database,
@@ -61,11 +70,6 @@ public class ProposalsLiveHandler {
 
 			p.setNumberOfVotes(p.getNumberOfVotes() + newVote);
 		}
-		// else {
-		// p = new Proposal();
-		// p.setTitle(contents[0]);
-		// proposals.put(p.getId(), p);
-		// }
 
 		logger.info("New vote received: \"" + data + "\"");
 	}
@@ -88,19 +92,39 @@ public class ProposalsLiveHandler {
 		p1.setTitle("Liberate snakes through the city");
 		p1.setContent("We all hate rats, we should set" + " some snakes free to eat them, once"
 				+ " the rats are extinct we can throw the snakes in Gijón");
-		p1.setMinVotes(1000);
+		p1.setMinVotes(100);
 		p1.setTopic(Topic.HEALTHCARE);
 		p1.setNumberOfVotes(890);
 
+		pService.save(p1);
+		
+		User u1 = new User();
+		u1.setName("David");
+		u1.setEmail("asuka98XD@gmail.com");
+		u1.setDNI("123");
+		
+		User u2 = new User();
+		u2.setName("Francisco");
+		u2.setEmail("marhuenda@elmundo.com");
+		u2.setDNI("456");
+		
+		uService.save(u1);
+		uService.save(u2);
+		
 		Comment c1 = new Comment();
-		Association.MakeComment.link(new User(), c1, p1);
+		Association.MakeComment.link(u1, c1, p1);
 		c1.setContent("pole");
 
 		Comment c2 = new Comment();
 		c2.setContent("No te lo perdonare Carmena");
-		Association.MakeComment.link(new User(), c2, p1);
+		Association.MakeComment.link(u2, c2, p1);
 
-		pService.save(p1);
+		
+
+
+
+		cService.save(c1);
+		cService.save(c2);
 
 		Map<Long, Proposal> proposalsMap = new HashMap<Long, Proposal>();
 

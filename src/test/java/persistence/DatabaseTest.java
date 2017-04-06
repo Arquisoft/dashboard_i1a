@@ -56,7 +56,7 @@ public class DatabaseTest {
 
 	@Test
 	public void testServices() {
-		assertTrue(uS.findAll().size() == 4);
+		assertTrue(uS.findAll().size() == 6);
 		assertTrue(uS.checkExists(u1.getId()));
 		assertTrue(uS.checkExists(u2.getId()));
 		assertTrue(uS.checkExists(u3.getId()));
@@ -90,7 +90,7 @@ public class DatabaseTest {
 
 		// Comments
 
-		assertTrue(cS.findAll().size() == 4);
+		assertTrue(cS.findAll().size() == 6);
 		assertTrue(cS.checkExists(c1.getId()));
 		assertTrue(cS.checkExists(c2.getId()));
 		assertTrue(cS.checkExists(c3.getId()));
