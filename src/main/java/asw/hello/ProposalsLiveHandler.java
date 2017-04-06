@@ -35,7 +35,7 @@ public class ProposalsLiveHandler {
 
 	/**
 	 * When new vote arrives, the data is updated here, NOT updated on the database,
-	 * participation team will handle that, we need speed, not consistency.
+	 * participation team will handle that, we need to focus on updating the date shown to the user.
 	 * 
 	 * @param data
 	 */
@@ -67,9 +67,16 @@ public class ProposalsLiveHandler {
 		// proposals.put(p.getId(), p);
 		// }
 
-		logger.info("New message received: \"" + data + "\"");
+		logger.info("New vote received: \"" + data + "\"");
 	}
 
+	@KafkaListener(topics = "newProposal", containerFactory="kafkaListener2ContainerFactory")
+	public void listenProposals(Proposal proposal) {
+		proposals.put(proposal.getId(), proposal);
+
+		logger.info("New proposal received: \"" + proposal + "\"");
+	}
+	
 	/**
 	 * Do the initial search on the database
 	 */

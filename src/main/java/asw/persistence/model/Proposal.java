@@ -70,5 +70,11 @@ public class Proposal extends Votable{
 
 	public void setUser(User user) {
 		this.user=user;		
+	}
+
+	@Override
+	public String toString() {
+	    return "Proposal [title=" + title + ", content=" + content + ", minVotes=" + minVotes + ", topic=" + topic
+		    + ", comments=" + comments + ", user=" + user + "]";
 	}	
 }
