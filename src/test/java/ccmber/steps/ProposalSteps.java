@@ -34,10 +34,10 @@ public class ProposalSteps {
 	driver.quit();
     }
 
-    @Given("^a list of users:$")
-    public void a_list_of_users(List<User> users) throws Throwable {
-	for (User u : users) {
-	    LOG.debug("Inserting user..." + u.name + " - " + u.password);
+    @Given("^a list of proposals:$")
+    public void a_list_of_users(List<Prop> proposals) throws Throwable {
+	for (Prop p : proposals) {
+	    LOG.debug("Inserting proposal..." + p.name + " - " + p.id);
 	}
     }
 
@@ -54,8 +54,8 @@ public class ProposalSteps {
 	Assert.assertTrue("Text not found!", list.size() > 0);
     }
 
-    public static class User {
+    public static class Prop {
 	private String name;
-	private String password;
+	private Long id;
     }
 }

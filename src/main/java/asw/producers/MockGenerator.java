@@ -18,7 +18,7 @@ import asw.services.ProposalService;
 @Component
 public class MockGenerator {
 
-    private static final String MOCK_CONTENT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices auctor venenatis. Duis tempus mi nec elit condimentum, eu tincidunt urna";
+    public static final String MOCK_CONTENT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices auctor venenatis. Duis tempus mi nec elit condimentum, eu tincidunt urna";
     private static final Random RANDOM = new Random();
 
     private List<String> titles;
@@ -34,7 +34,7 @@ public class MockGenerator {
     }
 
     @Autowired
-    private ProposalService proposalRepository;
+    private ProposalService proposalService;
 
     /**
      * Simulates the creation of a random vote of the form idProposal;symbol
@@ -46,8 +46,8 @@ public class MockGenerator {
      */
     public String generateVote() {
 
-	int randomPos = RANDOM.nextInt(proposalRepository.findAll().size());
-	String vote = String.valueOf(proposalRepository.findAll().get(randomPos).getId());
+	int randomPos = RANDOM.nextInt(proposalService.findAll().size());
+	String vote = String.valueOf(proposalService.findAll().get(randomPos).getId());
 
 	vote += ";";
 	vote += System.currentTimeMillis() % 2 == 0 ? "+" : "-";
@@ -69,7 +69,7 @@ public class MockGenerator {
 	p.setTopic(Topic.randomTopic());
 	p.setNumberOfVotes(RANDOM.nextInt(100000));
 
-	proposalRepository.save(p);
+	proposalService.save(p);
 	return p;
     }
     
@@ -83,6 +83,10 @@ public class MockGenerator {
 //	int randomPos = RANDOM.nextInt(proposalRepository.findAll().size());
 	
 	return c;
+    }
+
+    public List<String> getTitles() {
+        return titles;
     }
     
     
