@@ -70,7 +70,7 @@ public class ProposalsLiveHandler {
 		logger.info("New vote received: \"" + data + "\"");
 	}
 
-	@KafkaListener(topics = "newProposal", containerFactory="kafkaListener2ContainerFactory")
+	@KafkaListener(topics = "newProposal", containerFactory="kafkaProposalListenerContainerFactory")
 	public void listenProposals(Proposal proposal) {
 		proposals.put(proposal.getId(), proposal);
 

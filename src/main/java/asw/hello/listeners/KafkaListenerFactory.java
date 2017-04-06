@@ -53,21 +53,21 @@ public class KafkaListenerFactory {
     ///////////////////////////////////////////
     
     @Bean
-    KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<Integer, String>> kafkaListener2ContainerFactory() {
+    KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<Integer, String>> kafkaProposalListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<Integer, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumer2Factory());
+        factory.setConsumerFactory(proposalConsumerFactory());
         factory.setConcurrency(3);
         factory.getContainerProperties().setPollTimeout(3000);
         return factory;
     }
 
     @Bean
-    public ConsumerFactory<Integer, String> consumer2Factory() {
-        return new DefaultKafkaConsumerFactory<>(consumer2Configs());
+    public ConsumerFactory<Integer, String> proposalConsumerFactory() {
+        return new DefaultKafkaConsumerFactory<>(proposalConsumerConfigs());
     }
 
     @Bean
-    public Map<String, Object> consumer2Configs() {
+    public Map<String, Object> proposalConsumerConfigs() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);

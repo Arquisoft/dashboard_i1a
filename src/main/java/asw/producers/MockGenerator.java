@@ -27,7 +27,7 @@ public class MockGenerator {
 	titles.add("Free coffee on Mondays");
 	titles.add("3-day weekends");
 	titles.add("Why don't we just die already");
-	titles.add("Send SDI to the hell");
+	titles.add("Send SDI to hell");
 	titles.add("Make la vida less dura");
 	titles.add("MAKE ASW GREAT AGAIN!");
     }
