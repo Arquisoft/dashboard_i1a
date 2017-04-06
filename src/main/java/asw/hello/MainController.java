@@ -20,46 +20,46 @@ import asw.services.ProposalService;
 @RequestMapping("/")
 public class MainController {
 
-	private static final Logger logger = Logger.getLogger(MainController.class);
-	private List<SseEmitter> sseEmitters = Collections.synchronizedList(new ArrayList<>());
+    private static final Logger LOGGER = Logger.getLogger(MainController.class);
+    private List<SseEmitter> sseEmitters = Collections.synchronizedList(new ArrayList<>());
 
-	@Autowired
-	private ProposalService pService;
+    @Autowired
+    private ProposalService pService;
 
-	@Autowired
-	private ProposalsLiveHandler proposals;
+    @Autowired
+    private ProposalsLiveHandler proposals;
 
-	
-	
-	@RequestMapping(value = {"/admin", "/" })
-	public String admin() {
-		return "admin";
+    @RequestMapping(value = { "/admin", "/" })
+    public String admin() {
+	LOGGER.debug("Redirected to live page");
+	return "admin";
+    }
+
+    @RequestMapping("/viewProposal")
+    public String viewProposal(Model model, Long proposalId) {
+	// Check the correctness of the parameter
+	if (proposalId != null) {
+	    // Search for the chosen proposal on the database
+	    Proposal p = pService.findById(proposalId);
+
+	    if (p != null) {
+		model.addAttribute("proposal", p);
+	    }
 	}
+	LOGGER.debug("Redirected to view proposal");
+	return "viewProposal";
+    }
 
-	@RequestMapping("/viewProposal")
-	public String viewProposal(Model model, Long proposalId) {
-		// Check the correctness of the parameter
-		if (proposalId != null) {
-			// Search for the chosen proposal on the database
-			Proposal p = pService.findById(proposalId);
+    @ModelAttribute("proposals")
+    public Map<Long, Proposal> getProposals() {
+	return proposals.getMap();
+    }
 
-			if (p != null) {
-				model.addAttribute("proposal", p);
-			}
-		}
-		return "viewProposal";
-	}
+    public List<SseEmitter> getSseEmitters() {
+	return sseEmitters;
+    }
 
-	@ModelAttribute("proposals")
-	public Map<Long, Proposal> getProposals() {
-		return proposals.getMap();
-	}
-
-	public List<SseEmitter> getSseEmitters() {
-		return sseEmitters;
-	}
-
-	public void setSseEmitters(List<SseEmitter> sseEmitters) {
-		this.sseEmitters = sseEmitters;
-	}
+    public void setSseEmitters(List<SseEmitter> sseEmitters) {
+	this.sseEmitters = sseEmitters;
+    }
 }

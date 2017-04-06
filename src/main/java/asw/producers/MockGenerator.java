@@ -6,6 +6,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import asw.persistence.model.Comment;
 import asw.persistence.model.Proposal;
 import asw.persistence.model.Topic;
 import asw.services.ProposalService;
@@ -71,4 +72,18 @@ public class MockGenerator {
 	proposalRepository.save(p);
 	return p;
     }
+    
+    public Comment generateComment() {
+	Comment c = new Comment();
+	
+	c.setContent(MOCK_CONTENT);
+	c.setNumberOfVotes(RANDOM.nextInt(15));
+	
+//	TODO: llamar a Association como dios manda
+//	int randomPos = RANDOM.nextInt(proposalRepository.findAll().size());
+	
+	return c;
+    }
+    
+    
 }

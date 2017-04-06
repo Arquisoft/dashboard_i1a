@@ -81,8 +81,8 @@ footer p, footer time {
 			<tr th:each="proposal,iterationStatus  : ${proposals}">
 				<td th:text="${iterationStatus.count}">1</td>
 				<td th:text="${proposal.getValue().getNumberOfVotes()}"></td>
-				<td> <a th:text="${proposal.getValue().getTitle()}"
-							th:href="@{viewProposal?(proposalId=${proposal.getValue().getId()})}"/></td>
+				<td><a th:text="${proposal.getValue().getTitle()}"
+					th:href="@{viewProposal?(proposalId=${proposal.getValue().getId()})}" /></td>
 				<td th:text="${proposal.getValue().getTopic()}"></td>
 			</tr>
 		</table>

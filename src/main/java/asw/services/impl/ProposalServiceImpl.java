@@ -21,6 +21,7 @@ public class ProposalServiceImpl implements ProposalService{
 		setRepository(repository);
 	}
 	
+	@Override
 	public void save(Proposal proposal) {
 		getRepository().save(proposal);
 	}

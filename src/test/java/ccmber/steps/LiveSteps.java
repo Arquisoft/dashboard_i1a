@@ -22,10 +22,11 @@ import static org.junit.Assert.*;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+@SuppressWarnings("deprecation")
 @ContextConfiguration(classes=Application.class, loader=SpringApplicationContextLoader.class)
 @IntegrationTest
 @WebAppConfiguration
-public class LandingSteps {
+public class LiveSteps {
   
   @Autowired
   protected WebApplicationContext context;
@@ -49,7 +50,7 @@ public class LandingSteps {
     assertThat(result.getResponse().getStatus(), is(status));
   }
 
-  @Then("^the client receives the string \"([^\"]*)\"$")
+  @Then("^the client is shown the page \"([^\"]*)\"$")
   public void the_client_receives_the_string(String str) throws Throwable {
    assertThat(result.getResponse().getContentAsString(), containsString(str));
   }
